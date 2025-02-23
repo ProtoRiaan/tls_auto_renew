@@ -1,0 +1,24 @@
+name: Trigger Update
+
+on:
+  workflow_dispatch:
+    inputs:
+      proxy_alias:
+        description: 'Proxy to update'
+        default: 'NULL'
+        required: true
+        type: string
+
+jobs:
+  Ansible_Update:
+    name: Update the TLS certicate
+    runs-on: ubuntu-latest
+    steps:
+    - name: Install Ansible
+      run: pip3 install ansible
+
+    - name: Run Ansible Playbook
+      env:
+        ANSIBLE_HOST_KEY_CHECKING: False
+      run: |
+        ansible-playbook -i inventory/hosts.ini update_TLS.yml --limit ${{ github.event.inputs.proxy_alias }}      
