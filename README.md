@@ -18,5 +18,7 @@ Github action spins up ansible container that updates the certificates
 ### Ansible
 Ansible playbook templates the DNS api token and bash script to run the LetsEncrypt Certbot container which updates the current TLS certificates with newly updated and signed certs. 
 
-## Security
+## TODO
+
+### Security
 Research security to confirm its safe to put vaults in a public repo. 
