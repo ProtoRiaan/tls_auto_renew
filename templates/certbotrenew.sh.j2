@@ -1,0 +1,16 @@
+#!/bin/bash
+sudo docker run -it --rm --name certbot \
+        -v "letsencrypt-etc:/etc/letsencrypt" \
+        -v "letsencrypt-var:/var/lib/letsencrypt" \
+        certbot/dns-linode certonly \
+        --dns-linode-credentials /var/lib/letsencrypt/credentials.ini \
+        --register-unsafely-without-email --agree-tos \
+        --dns-linode-propagation-seconds 180 \
+        --noninteractive \
+        --dns-linode \
+        --expand \
+        -d {{ domain }} \
+        -d www.{{ domain }} \
+{% for server in nginx_servers %}
+        -d {{ server }}.{{ domain }} \
+{% endfor %}
