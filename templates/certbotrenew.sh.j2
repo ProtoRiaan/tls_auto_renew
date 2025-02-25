@@ -9,6 +9,7 @@ sudo docker run -it --rm --name certbot \
         --noninteractive \
         --dns-linode \
         --expand \
+        --dry-run \
         -d {{ domain }} \
         -d www.{{ domain }} \
 {% for server in nginx_servers %}
