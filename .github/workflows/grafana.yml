@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Install Ansible
-      run: pip3 --break-system-packages install ansible
+      run: pip3 install --break-system-packages ansible
 
     - name: Template the vault key
       run: echo ${{ secrets.ANSIBLE_VAULT_KEY }} > .vaultkey
