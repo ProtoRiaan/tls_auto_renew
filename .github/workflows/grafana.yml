@@ -14,11 +14,18 @@ jobs:
     name: Update the TLS certicate
     runs-on: ubuntu-latest
     steps:
+
+    - name: Check out repository code
+      uses: actions/checkout@v4
+
     - name: Install Ansible
       run: pip3 install --break-system-packages ansible
 
     - name: Template the vault key
       run: echo '${{ secrets.ANSIBLE_VAULT_KEY }}' > .vaultkey
+
+    - name: test the templateing 
+      run: cat .vaultkey
 
     - name: Run Ansible Playbook
       env:
