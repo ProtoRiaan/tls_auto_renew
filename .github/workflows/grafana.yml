@@ -24,6 +24,11 @@ jobs:
     - name: Template the vault key
       run: echo '${{ secrets.ANSIBLE_VAULT_KEY }}' > .vaultkey
 
+    - name: Set up SSH
+      run: |
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > private_key.pem
+        chmod 600 private_key.pem
+      
     - name: test the templateing 
       run: cat .vaultkey
 
@@ -32,4 +37,4 @@ jobs:
         ANSIBLE_HOST_KEY_CHECKING: False
         ANSIBLE_VAULT_PASSWORD_FILE: .vaultkey
       run: |
-        ansible-playbook -i inventory.ini ${{ github.workspace }}/update_cert.yml --limit ${{ github.event.inputs.proxy_alias }}      
+        ansible-playbook -i inventory.ini ${{ github.workspace }}/update_cert.yml --limit ${{ github.event.inputs.proxy_alias }} --private-key private_key.pem
