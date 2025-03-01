@@ -32,4 +32,4 @@ jobs:
         ANSIBLE_HOST_KEY_CHECKING: False
         ANSIBLE_VAULT_PASSWORD_FILE: .vaultkey
       run: |
-        ansible-playbook -i hosts.ini ${{ github.workspace }}/update_cert.yml --limit ${{ github.event.inputs.proxy_alias }}      
+        ansible-playbook -i inventory.ini ${{ github.workspace }}/update_cert.yml --limit ${{ github.event.inputs.proxy_alias }}      
