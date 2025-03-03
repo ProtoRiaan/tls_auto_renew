@@ -1,0 +1,21 @@
+ansible_host: "{{ vault_ansible_host }}"
+host_url: "{{ vault_host_url }}"
+
+subdomain: "{{ vault_subodmain }}"
+domain: "{{ vault_domain }}"
+
+proxied_services:
+  - gitea
+  - grafana
+  - jellyfin
+  - kasm
+  - nas
+  - pgadmin
+  - prom
+  - qbit
+  - servarr
+  - radarr
+  - sonarr
+  - lidarr
+  - unifi
+  - xo
