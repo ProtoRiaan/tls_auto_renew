@@ -23,8 +23,8 @@
         mode: 0600
 
     - name: Renew lets encrypt certs via Certbot.
-      ansible.builtin.script: 
-        cmd: renewpki.sh  
+      ansible.builtin.shell: 
+        cmd: "/home/{{ ansible_user }}/containers/nginX/certbot_renew.sh"
 
 
 
