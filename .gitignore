@@ -2,3 +2,4 @@ vault
 .vaultkey
 *pem
 .vscode
+private_key
