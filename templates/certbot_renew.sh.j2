@@ -10,6 +10,6 @@ sudo docker run -it --rm --name certbot \
         --dns-linode \
         --expand \
         --dry-run \
-{% for server in nginx_servers %}
-        -d {{ proxied_services }}.{{ subdomain }}.{{ domain }} \
+{% for server in proxied_services %}
+        -d {{ server }}.{{ subdomain }}.{{ domain }} \
 {% endfor %}
