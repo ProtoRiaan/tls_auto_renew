@@ -11,5 +11,5 @@ sudo docker run -it --rm --name certbot \
         --expand \
         --dry-run \
 {% for server in proxied_services %}
-        -d {{ server }}.{{ subdomain }}.{{ domain }} \
+        -d {{ server }}.{{ subdomain }}{{ domain }} \
 {% endfor %}
