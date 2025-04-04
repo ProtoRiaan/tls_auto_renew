@@ -16,7 +16,7 @@
 
     - name: Template Linode DNS Credentails.
       template:
-        src: letsencrypt_dns.ini.j2
+        src: linode.ini.j2
         dest: /var/lib/docker/volumes/letsencrypt-var/_data/credentials.ini
         owner: root
         group: root
