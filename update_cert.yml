@@ -24,7 +24,7 @@
 
     - name: Renew lets encrypt certs via Certbot.
       ansible.builtin.shell: 
-        cmd: "/home/{{ ansible_user }}/containers/nginX/certbot_renew.sh"
+        cmd: "/home/{{ ansible_user }}/containers/nginx/certbot_renew.sh"
 
 
 
