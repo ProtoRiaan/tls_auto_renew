@@ -15,13 +15,12 @@
 
 
     - name: Template Linode DNS Credentails.
-      template:
+      ansible.builtin.template:
         src: linode.ini.j2
         dest: /var/lib/docker/volumes/letsencrypt-var/_data/credentials.ini
         owner: root
         group: root
         mode: 0600
-
 
 # This method was working but also hanging in ansible and locked up alot of resources on the server causing a restart
 # Switching to a different method, looking at the docker module to run Certbot.
@@ -37,5 +36,28 @@
     #   ansible.builtin.debug:
     #     var: result
 
-
+    - name: Run Linode certbot 
+      community.docker.docker_container:
+        name: "certbot"
+        image: "certbot/dns-linode"
+        state: started
+        restart_policy: no
+        auto_remove: yes
+        volumes:
+          - "letsencrypt-etc:/etc/letsencrypt"
+          - "letsencrypt-var:/var/lib/letsencrypt"
+        command: >-
+          certonly
+          --agree-tos
+          --register-unsafely-without-email 
+          --dns-linode
+          --dns-linode-propagation-seconds 180
+          --dns-linode-credentials /var/.secrets/certbot/credentials.ini
+          --expand
+          --dry-run
+          --server https://acme-v02.api.letsencrypt.org/directory
+          -d {{ domains_list | join(' -d ') }}
+        ports:
+          - "80:80"
+          - "443:443"
 
