@@ -46,23 +46,21 @@
         volumes:
           - "letsencrypt-etc:/etc/letsencrypt"
           - "letsencrypt-var:/var/lib/letsencrypt"
-        command: >-
+        command: >
           certonly
+          --dns-linode-credentials /var/lib/letsencrypt/credentials.ini
           --agree-tos
-          --register-unsafely-without-email 
+          --register-unsafely-without-email
           --dns-linode
           --dns-linode-propagation-seconds 180
-          --dns-linode-credentials /var/.secrets/certbot/credentials.ini
           --expand
           --dry-run
           --server https://acme-v02.api.letsencrypt.org/directory
           {{ domains }}
-        ports:
-          - "80:80"
-          - "443:443"
+        command_handling: "compatibility"  
       vars:
         domains: >-
-          {% for server in proxied_services %}
+          {%+ for server in proxied_services -%}
                   -d {{ server }}.{{ subdomain }}{{ domain }}
           {% endfor %}   
       register: certbot_container_results
@@ -72,5 +70,11 @@
         msg: 
           var1: "{{ certbot_container_results }}"
           var2: "{{ domains }}"
+      vars:
+        domains: >-
+          {%+ for server in proxied_services -%}
+                  -d {{ server }}.{{ subdomain }}{{ domain }}
+          {% endfor %}   
+
 
 
