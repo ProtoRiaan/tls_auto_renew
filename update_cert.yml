@@ -56,8 +56,21 @@
           --expand
           --dry-run
           --server https://acme-v02.api.letsencrypt.org/directory
-          -d {{ domains_list | join(' -d ') }}
+          {{ domains }}
         ports:
           - "80:80"
           - "443:443"
+      vars:
+        domains: >-
+          {% for server in proxied_services %}
+                  -d {{ server }}.{{ subdomain }}{{ domain }}
+          {% endfor %}   
+      register: certbot_container_results
+
+    - name: Debug container results
+      ansible.builtin.debug:
+        var: 
+         - certbot_container_results
+         - domains
+
 
