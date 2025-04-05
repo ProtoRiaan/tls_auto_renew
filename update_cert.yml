@@ -69,8 +69,8 @@
 
     - name: Debug container results
       ansible.builtin.debug:
-        var: 
-         - certbot_container_results
-         - domains
+        msg: 
+          var1: "{{ certbot_container_results }}"
+          var2: "{{ domains }}"
 
 
