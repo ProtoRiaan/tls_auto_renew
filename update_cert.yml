@@ -13,7 +13,6 @@
         group: "{{ ansible_user }}"
         mode: 0774
 
-
     - name: Template Linode DNS Credentails.
       ansible.builtin.template:
         src: linode.ini.j2
@@ -63,18 +62,5 @@
           {%+ for server in proxied_services -%}
                   -d {{ server }}.{{ subdomain }}{{ domain }}
           {% endfor %}   
-      register: certbot_container_results
-
-    - name: Debug container results
-      ansible.builtin.debug:
-        msg: 
-          var1: "{{ certbot_container_results }}"
-          var2: "{{ domains }}"
-      vars:
-        domains: >-
-          {%+ for server in proxied_services -%}
-                  -d {{ server }}.{{ subdomain }}{{ domain }}
-          {% endfor %}   
-
 
 
