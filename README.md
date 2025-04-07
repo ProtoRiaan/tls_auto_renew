@@ -21,4 +21,6 @@ Ansible playbook templates the DNS api token and bash script to run the LetsEncr
 ## TODO
 
 ### Security
-Research security to confirm its safe to put vaults in a public repo. 
+Research security to confirm its safe to put vaults in a public repo.
+Update automation to pull private inventory repo.
+Fix the templating of the credentials to use a docker container or docker copy instead of ansible template 
