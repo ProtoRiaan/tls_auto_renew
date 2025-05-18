@@ -5,7 +5,7 @@ sudo docker run -it --rm --name certbot \
         certbot/dns-linode certonly \
         --dns-linode-credentials /var/lib/letsencrypt/credentials.ini \
         --register-unsafely-without-email --agree-tos \
-        --dns-linode-propagation-seconds 180 \
+        --dns-linode-propagation-seconds 240 \
         --noninteractive \
         --dns-linode \
         --expand \

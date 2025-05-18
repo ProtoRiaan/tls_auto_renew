@@ -51,7 +51,7 @@
           --agree-tos
           --register-unsafely-without-email
           --dns-linode
-          --dns-linode-propagation-seconds 180
+          --dns-linode-propagation-seconds 240
           --expand
           --server https://acme-v02.api.letsencrypt.org/directory
           {{ domains }}
