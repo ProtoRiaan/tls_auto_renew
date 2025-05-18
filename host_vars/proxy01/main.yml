@@ -4,5 +4,5 @@ host_url: "{{ vault_host_url }}"
 subdomain: "{{ vault_subdomain }}"
 domain: "{{ vault_domain }}"
 
-proxied_services: "*" 
+proxied_services: "*." 
   
